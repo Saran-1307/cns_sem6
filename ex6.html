@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <body>
+    p: <input id="p" /><br /><br />
+    q: <input id="q" /><br /><br />
+    t: <input id="m" /><br /><br />
+
+    <button onclick="rsa()">Submit</button>
+
+    <p id="res"></p>
+
+    <script>
+      function rsa() {
+        let p = parseInt(document.getElementById("p").value);
+        let q = parseInt(document.getElementById("q").value);
+        let t = parseInt(document.getElementById("m").value);
+
+        let n = p * q;
+        let phi = (p - 1) * (q - 1);
+
+        let e = 2;
+        while (phi % e == 0) e++;
+
+        let d = 1;
+        while ((d * e) % phi != 1) d++;
+
+        let c = Math.pow(t, e) % n;
+        let dec = Math.pow(c, d) % n;
+
+        document.getElementById("res").innerHTML =
+          "Encrypted: " + c + "<br>Decrypted: " + dec;
+      }
+    </script>
+  </body>
+</html>
