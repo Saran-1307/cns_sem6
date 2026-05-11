@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNS Programs Directory</title>
+  <meta name="description" content="Download directory for Cryptography and Network Security programs and manuals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 0.8s ease-out backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Stagger animations */
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+    .card:nth-child(7) { animation-delay: 0.7s; }
+    .card:nth-child(8) { animation-delay: 0.8s; }
+    .card:nth-child(9) { animation-delay: 0.9s; }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5),
+                  0 0 20px rgba(59, 130, 246, 0.2);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      width: 4.5rem;
+      height: 4.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .content {
+      flex-grow: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content h2 {
+      font-size: 1.35rem;
+      margin: 0 0 0.75rem 0;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .sub-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .sub-list li {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .sub-list li::before {
+      content: '→';
+      color: var(--accent);
+      margin-right: 0.75rem;
+      font-weight: bold;
+      opacity: 0.8;
+    }
+
+    .download-btn {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-hover);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 0.875rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover .download-btn {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Special Styling for Manual */
+    .manual-card .icon {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    /* Special Styling for Archive */
+    .archive-card {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .archive-card:hover {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5),
+                  0 0 20px rgba(168, 85, 247, 0.3);
+    }
+    .archive-card .icon {
+      background: rgba(168, 85, 247, 0.1);
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+    .archive-card .download-btn {
+      background: rgba(168, 85, 247, 0.1);
+      color: #d8b4fe;
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+    .archive-card:hover .download-btn {
+      background: #a855f7;
+      color: white;
+      border-color: #a855f7;
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 3rem 1.5rem; }
+      h1 { font-size: 2.5rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CNS Programs</h1>
+      <p>Cryptography and Network Security Download Directory</p>
+    </header>
+
+    <div class="grid">
+      <!-- Card for Manual -->
+      <a href="manual-readme.pdf" download="CNS_Lab_Manual.pdf" class="card manual-card">
+        <div class="icon">📘</div>
+        <div class="content">
+          <h2>Lab Manual</h2>
+          <p>Complete official reference manual for all cryptography and network security experiments.</p>
+        </div>
+        <div class="download-btn">Download Manual</div>
+      </a>
+
+      <!-- Card for 1a-2b -->
+      <a href="1a-2b.pdf" download="Ex1-2_Ciphers.pdf" class="card">
+        <div class="icon">📄</div>
+        <div class="content">
+          <h2>Ex 1 & 2: Ciphers</h2>
+          <ul class="sub-list">
+            <li>1a - Caesar Cipher</li>
+            <li>1b - Playfair Cipher</li>
+            <li>1c - Hill Cipher</li>
+            <li>1d - Vigenere Cipher</li>
+            <li>2a - Rail Fence</li>
+            <li>2b - Row & Column</li>
+          </ul>
+        </div>
+        <div class="download-btn">Download PDF</div>
+      </a>
+
+      <!-- Card for 3 -->
+      <a href="Ex3.java" download="Ex3_DES.java" class="card">
+        <div class="icon">☕</div>
+        <div class="content">
+          <h2>Ex 3: DES Algorithm</h2>
+          <p>Implementation of the Data Encryption Standard (DES) algorithm.</p>
+        </div>
+        <div class="download-btn">Download .java</div>
+      </a>
+
+      <!-- Card for 4 -->
+      <a href="Ex4.java" download="Ex4_AES.java" class="card">
+        <div class="icon">☕</div>
+        <div class="content">
+          <h2>Ex 4: AES Algorithm</h2>
+          <p>Implementation of the Advanced Encryption Standard (AES) algorithm.</p>
+        </div>
+        <div class="download-btn">Download .java</div>
+      </a>
+
+      <!-- Card for 5 -->
+      <a href="ex5.c++" download="ex5_OpenSSL.cpp" class="card">
+        <div class="icon">⚙️</div>
+        <div class="content">
+          <h2>Ex 5: OpenSSL</h2>
+          <p>Demonstration of cryptographic operations using the OpenSSL library.</p>
+        </div>
+        <div class="download-btn">Download .c++</div>
+      </a>
+
+      <!-- Card for 6 -->
+      <a href="ex6.html" download="ex6_HTTP_JS.html" class="card">
+        <div class="icon">🌐</div>
+        <div class="content">
+          <h2>Ex 6: HTTP & JS</h2>
+          <p>Implementation of web security concepts using HTTP and JavaScript.</p>
+        </div>
+        <div class="download-btn">Download .html</div>
+      </a>
+
+      <!-- Card for 7 -->
+      <a href="ex7.java" download="ex7_SHA1.java" class="card">
+        <div class="icon">☕</div>
+        <div class="content">
+          <h2>Ex 7: SHA-1 Algorithm</h2>
+          <p>Implementation of the Secure Hash Algorithm 1 (SHA-1).</p>
+        </div>
+        <div class="download-btn">Download .java</div>
+      </a>
+
+      <!-- Card for 10 -->
+      <a href="ex10.java" download="ex10_DiffieHellman.java" class="card">
+        <div class="icon">☕</div>
+        <div class="content">
+          <h2>Ex 10: Diffie Hellman</h2>
+          <p>Implementation of the Diffie-Hellman key exchange algorithm.</p>
+        </div>
+        <div class="download-btn">Download .java</div>
+      </a>
+
+    </div>
+  </div>
+</body>
+</html>
